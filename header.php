@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width">
-<title>七日町の走り屋</title>
+<title>七日町の思い出</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" media="all" href="css/style.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
@@ -45,8 +45,8 @@ function viewSlide(msec, slide_no = -1)
 </header>
 
 <?php
-    $server = "mysql1.php.xdomain.ne.jp";
-    $user = "tora3blog_worker";
-    $pass = "Kingu822";
+    $server = "localhost";
+    $user = "kurokuro";
+    $pass = "secret";
     $database = "tora3blog_myblog";
 ?>
