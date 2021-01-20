@@ -2,27 +2,11 @@
 
 <?php
 //DB接続
-$db = mysqli_connect($server, $user, $pass);
-if (!$db) {
-    echo "Cannot connect to MySQL.";
-    exit;
-}
-
-//データベースの作成と接続
-mysqli_query($db, "create database if not exists ".$database." default character set utf8");
-if (!mysqli_select_db($db, $database)) {
-    echo "Cannot connect to database.<br>";
-}
+connectMySQL();
 
 //テーブルの作成
-mysqli_query($db, "create table if not exists article(
-    number int auto_increment,
-    img1 mediumblob not null,
-    img2 mediumblob not null,
-    img3 mediumblob not null,
-    content text not null,
-    primary key(number)
-)");
+$query = "create table if not exists article(number int auto_increment, img1 mediumblob not null, img2 mediumblob not null, img3 mediumblob not null, content text not null, primary key(number))";
+mysqlQuery($query);
 ?>
 
 <!-- EDIT -->
@@ -35,10 +19,10 @@ mysqli_query($db, "create table if not exists article(
     <div class="innerS">
         <form method="post" enctype="multipart/form-data" action="edit.php">
             <div class="center">
-                <p><input type="file" name="upimage1" size="200" required></p>
-                <p><input type="file" name="upimage2" size="200" required></p>
-                <p><input type="file" name="upimage3" size="200" required></p>
-                <p><textarea name="content" rows="40" cols="50" required></textarea></p>
+                <p><input type="file" name="upimage1" size="2000" class="btn btn-dark my-2" required></p>
+                <p><input type="file" name="upimage2" size="2000" class="btn btn-dark my-2" required></p>
+                <p><input type="file" name="upimage3" size="2000" class="btn btn-dark my-2" required></p>
+                <p><textarea name="content" style="width:70%; height:300px;" class="my-2" required></textarea></p>
                 <p><button type="submit" name="submit">追加</button></p>
             </div>
         </form>
@@ -71,13 +55,10 @@ mysqli_query($db, "create table if not exists article(
     $imgdat3 = file_get_contents($upimage3);
     $imgdat3 = mysqli_real_escape_string($db, $imgdat3);
 
-    $sql = "insert into article (img1, img2, img3, content) values ('".$imgdat1."','".$imgdat2."','".$imgdat3."','".$content."')";
+    $query = "insert into article (img1, img2, img3, content) values ('".$imgdat1."','".$imgdat2."','".$imgdat3."','".$content."')";
+    mysqlQuery($query);
+    ?>
 
-    $result = mysqli_query($db, $sql);
-    if (!$result) {
-        echo "Cannot execute sql";
-        exit;
-    } ?>
     <!-- MESSAGE -->
     <br><br>
     <section id="sec01">
@@ -96,8 +77,6 @@ mysqli_query($db, "create table if not exists article(
 <!-- ADD -->
 
 <footer id="footer">
-    Copyright(c) 2016 Sample Inc. All Rights Reserved. Design by <a href="http://f-tpl.com"
-        target="_blank">http://f-tpl.com</a><!-- ←クレジット表記を外す場合はシリアルキーが必要です http://f-tpl.com/credit/ -->
 </footer>
 
 </body>

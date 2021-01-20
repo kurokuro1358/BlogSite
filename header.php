@@ -35,18 +35,30 @@ function viewSlide(msec, slide_no = -1)
 	setTimeout(function(){viewSlide(msec, slide_no);}, msec);
 }
 </script>
+
 </head>
 
 <body id="top">
-<header id="header">
-	<div id="headerWrap">
-		<h1><a href="index.php"><img src="images/mylogo.jpg" width="142" height="80" alt="logo"></a></h1>
+
+<div class="container my-1">
+	<ul class="nav nav-tabs">
+	<li class="nav-item">
+		<a class="nav-link" href="index.php">ホーム</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="edit.php">ブログ作成</a>
+	</li>
+	</ul>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-6 offset-3">
+			<a href="index.php"><img src="images/mylogo.jpg" class="img-fluid" alt="logo"></a>
+		</div>
 	</div>
-</header>
+</div>
 
 <?php
-    $server = "localhost";
-    $user = "kurokuro";
-    $pass = "secret";
-    $database = "tora3blog_myblog";
+	include("template.php");
 ?>

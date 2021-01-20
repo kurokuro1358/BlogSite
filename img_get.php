@@ -1,21 +1,8 @@
 <?php
-    $server = "localhost";
-    $user = "kurokuro";
-    $pass = "secret";
-    $database = "tora3blog_myblog";
+    include("template.php");
 
 //DB接続
-$db = mysqli_connect($server, $user, $pass);
-if (!$db) {
-    echo "Cannot connect to MySQL.<br>";
-    exit();
-}
-
-//データベースの作成と接続
-mysqli_query($db, "create database if not exists ".$database." default character set utf8");
-if (!mysqli_select_db($db, $database)) {
-    echo "Cannot connect to database.<br>";
-}
+connectMySQL();
 
 if ($_GET['what'] == 'img1') {
     // 画像データ取得

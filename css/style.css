@@ -132,21 +132,20 @@ input:focus {
 #mainImg {
     position: relative;
     overflow: hidden;
-    width: 100%;
-    height: 528px;
+    width: 50%;
+    height: auto;
 }
 
 #mainImg img {
     position: absolute;
     left: 50%;
-    max-width: 1280px;
-    width: 1280px;
-    height: 528px;
+    width: 50%;
+    height: auto;
     margin-left: -640px;
 }
 
 #headerWrap img {
-    width: 100%;
+    width: 50%;
     height: auto;
 }
 

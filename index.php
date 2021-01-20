@@ -2,21 +2,10 @@
 
 <?php
 //MySQLに接続
-$db = mysqli_connect($server, $user, $pass);
-if (!$db) {
-    echo "Cannot connect to MySQL.<br>";
-    exit();
-}
-
-//データベースの作成と接続
-mysqli_query($db, "create database if not exists ".$database." default character set utf8");
-if (!mysqli_select_db($db, $database)) {
-    echo "Cannot connect to database.<br>";
-}
+connectMySQL();
 ?>
 
 <?php if (!isset($_GET['number'])) { ?>
-
 
 <!-- MESSAGE -->
 <section id="sec01">
@@ -25,7 +14,8 @@ if (!mysqli_select_db($db, $database)) {
     </header>
     <div class="innerS">
         <div class="center">
-            目標　お金をためて大きい車を買いたい
+            黒木健太 (Kenta Kuroki)<br>
+            会津大学コンピュータ理工学部コンピュータ理工学科
         </div>
     </div>
 </section>
@@ -40,18 +30,19 @@ if (!mysqli_select_db($db, $database)) {
     <div class="container">
         <div class="row">
         <?php
-    //テーブルからデータを抽出
-    $sql = "select number from article";
-    $result = mysqli_query($db, $sql);
-    while ($data = mysqli_fetch_array($result)) {
+            //テーブルからデータを抽出
+            $query = "select number from article";
+            $datas = getQuery($query);
+            foreach($datas as $data){
         ?>
                 <div class="col-4 col-md-3">
                     <a href="index.php?number=<?php echo $data[0]; ?>">
                         <?php print("<img class=\"img-fluid\" src=\"img_get.php?number=" . $data[0] . "&what=img1\">"); ?>
                     </a>
                 </div>
-    <?php
-    } ?>
+            <?php
+            } 
+            ?>
         </div>
     </div>
 </section>
@@ -62,18 +53,18 @@ if (!mysqli_select_db($db, $database)) {
         $number = $_GET['number'];
 
         //テーブルからデータを抽出
-        $sql = "select number, content from article where number=".$number;
-        $result = mysqli_query($db, $sql); ?>
+        $query = "select number, content from article where number=".$number;
+        $datas = getQuery($query);
+        foreach($datas as $data){
+?>
 
-<?php
-    while ($data = mysqli_fetch_array($result)) {
-        ?>
-
-<section id="sec01">
-    <div class="innerS">
-        <?php echo nl2br($data[1]); ?>
+<div class="container my-3">
+    <div class="row">
+        <div class="col-8 offset-2">
+            <?php echo nl2br($data[1]); ?>
+        </div>
     </div>
-</section>
+</div>
 
 <section id="sec02">
     <div class="container">
@@ -92,8 +83,8 @@ if (!mysqli_select_db($db, $database)) {
 </section>
 
 <?php
-    }
-    } ?>
+        }
+} ?>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
